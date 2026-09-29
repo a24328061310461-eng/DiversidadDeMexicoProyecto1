@@ -1,0 +1,391 @@
+.fauna-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 0 0 auto;
+    margin: 0 2rem 1rem;
+}
+
+.fauna-escena {
+    position: relative;
+    width: 100%;
+    height: 430px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid rgba(0, 179, 126, 0.2);
+    border-radius: 28px;
+    background: #0b211b;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.28),
+        inset 0 0 100px rgba(0, 0, 0, 0.2);
+    isolation: isolate;
+}
+
+.fauna-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+.fauna-aviso {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(7, 20, 15, 0.55);
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    font-size: 0.76rem;
+    pointer-events: none;
+}
+
+.fauna-aviso i {
+    color: #e4bd52;
+}
+
+.fauna-controles {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    margin: 0;
+    padding: 16px 20px 13px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    background: rgba(15, 15, 15, 0.9);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+}
+
+.fauna-controles-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.fauna-controles-titulo i {
+    color: #e4bd52;
+    margin-right: 6px;
+}
+
+.fauna-controles-titulo strong {
+    color: #f0cd67;
+    font-family: Poppins, sans-serif;
+    font-size: 1rem;
+}
+
+.fauna-controles input[type="range"] {
+    display: block;
+    width: 100%;
+    height: 7px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    border-radius: 999px;
+    background: linear-gradient(
+        90deg,
+        #263f5f 0%,
+        #f3a55c 25%,
+        #79c7e6 52%,
+        #e98b65 78%,
+        #26304e 100%
+    );
+    outline: none;
+}
+
+.fauna-controles input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: #d4af37;
+    box-shadow: 0 0 0 5px rgba(212, 175, 55, 0.16);
+}
+
+.fauna-controles input[type="range"]::-moz-range-thumb {
+    width: 17px;
+    height: 17px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: #d4af37;
+}
+
+.fauna-marcas {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 0.68rem;
+}
+
+.fauna-info {
+    position: relative;
+    z-index: 2;
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 2rem 3rem;
+    padding: 22px;
+    border: 1px solid rgba(0, 179, 126, 0.16);
+    border-radius: 22px;
+    background: rgba(7, 30, 22, 0.94);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    animation: faunaInfoIn 0.45s ease both;
+}
+
+.fauna-info.cambio {
+    animation: faunaInfoIn 0.45s ease both;
+}
+
+@keyframes faunaInfoIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fauna-info-principal {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.fauna-info img {
+    width: 150px;
+    height: 120px;
+    flex: 0 0 150px;
+    object-fit: cover;
+    border-radius: 16px;
+    background: #153d2e;
+}
+
+.fauna-kicker {
+    display: block;
+    margin-bottom: 5px;
+    color: #83d5b4;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.fauna-info h3 {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 1.45rem;
+    line-height: 1.15;
+}
+
+.fauna-info .fauna-estado {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(212, 175, 55, 0.14);
+    color: #f0cd67;
+    font-size: 0.73rem;
+    font-weight: 700;
+}
+
+.fauna-descripcion {
+    margin: 18px 0;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.6;
+    font-size: 0.88rem;
+}
+
+.fauna-datos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.fauna-dato {
+    min-width: 0;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.065);
+}
+
+.fauna-dato strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #83d5b4;
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.fauna-dato span {
+    display: block;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.76rem;
+    line-height: 1.45;
+}
+
+:root[data-tema="claro"] .fauna-info {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(20, 100, 70, 0.14);
+    color: #294238;
+    box-shadow: 0 16px 40px rgba(30, 75, 55, 0.12);
+}
+
+:root[data-tema="claro"] .fauna-info h3 {
+    color: #173b2c;
+}
+
+:root[data-tema="claro"] .fauna-descripcion {
+    color: #38594b;
+}
+
+:root[data-tema="claro"] .fauna-dato {
+    background: rgba(0, 100, 70, 0.06);
+}
+
+:root[data-tema="claro"] .fauna-dato span {
+    color: #38594b;
+}
+
+:root[data-tema="claro"] .fauna-controles {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(20, 100, 70, 0.14);
+}
+
+:root[data-tema="claro"] .fauna-controles-titulo {
+    color: #294238;
+}
+
+:root[data-tema="claro"] .fauna-marcas {
+    color: #60776d;
+}
+
+@media (max-width: 900px) {
+    .fauna-datos {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .fauna-wrap {
+        margin: 0 1rem 1rem;
+        gap: 12px;
+    }
+
+    .fauna-escena {
+        height: 360px;
+        border-radius: 20px;
+    }
+
+    .fauna-controles {
+        padding: 14px;
+    }
+
+    .fauna-info {
+        margin: 0 1rem 2rem;
+        padding: 15px;
+    }
+
+    .fauna-info img {
+        width: 110px;
+        height: 95px;
+        flex-basis: 110px;
+    }
+
+    .fauna-info h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fauna-escena {
+        height: 300px;
+    }
+
+    .fauna-aviso {
+        top: 10px;
+        left: 10px;
+        font-size: 0.68rem;
+        padding: 7px 10px;
+    }
+
+    .fauna-info-principal {
+        align-items: flex-start;
+    }
+
+    .fauna-info img {
+        width: 90px;
+        height: 78px;
+        flex-basis: 90px;
+    }
+
+    .fauna-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .fauna-kicker {
+        font-size: 0.61rem;
+    }
+
+    .fauna-descripcion {
+        font-size: 0.8rem;
+        margin: 12px 0;
+    }
+
+    .fauna-datos {
+        grid-template-columns: 1fr;
+    }
+
+    .fauna-dato {
+        padding: 9px 10px;
+    }
+
+    .fauna-dato span {
+        font-size: 0.72rem;
+    }
+
+    .fauna-controles-titulo {
+        font-size: 0.76rem;
+    }
+}
+
+#fauna-canvas {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+#fauna-info-img {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.fauna-aviso {
+    display: none !important;
+}
+
+.fauna-horas,
+.fauna-escala,
+.fauna-horas-escala,
+.fauna-time-scale,
+.fauna-rango-horas {
+    display: none !important;
+}

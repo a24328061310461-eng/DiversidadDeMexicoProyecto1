@@ -1,0 +1,708 @@
+/* ==================================================
+   COMPONENTES · Diversidad de México
+   ================================================== */
+
+/* ============ NAVEGACIÓN FLOTANTE ============ */
+.nav-flotante {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(20, 20, 20, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all var(--trans);
+    white-space: nowrap;
+}
+
+.nav-btn i { font-size: 0.95rem; }
+
+.nav-btn:hover {
+    color: var(--texto);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.activo {
+    background: linear-gradient(135deg, var(--verde-brillante), var(--dorado));
+    color: var(--negro);
+    font-weight: 600;
+}
+
+.nav-btn span { display: inline-block; }
+
+@media (max-width: 700px) {
+    .nav-btn span { display: none; }
+    .nav-btn { padding: 0.6rem 0.8rem; }
+}
+
+/* ============ PAPEL PICADO ============ */
+.papel-picado {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* Botón de pausa del papel picado */
+.papel-picado-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--dorado);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    transition: all var(--trans);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.papel-picado-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: scale(1.1);
+    color: #fff;
+}
+
+/* ============ BOTÓN DE TEMA (CLARO/OSCURO) ============ */
+.tema-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--dorado);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    transition: all var(--trans);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.tema-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: scale(1.1) rotate(20deg);
+    color: #fff;
+}
+
+/* ============ CURSOR CON ESTELA ============ */
+.cursor-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* ==================================================
+   MAPA DE LEYENDAS
+   ================================================== */
+.mapa-wrap {
+    position: relative;
+    flex: 1;
+    margin: 0 2rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0d1f18 0%, #050a08 100%);
+    border: 1px solid rgba(0, 179, 126, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) inset;
+    min-height: 400px;
+}
+
+.mapa-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+}
+
+.mapa-canvas:active { cursor: grabbing; }
+
+.mapa-panel {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: min(340px, calc(100% - 2rem));
+    background: rgba(15, 15, 15, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.25rem;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.mapa-panel.abierto { transform: translateX(0); }
+
+.mapa-panel-cerrar {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 1.5rem;
+    color: var(--texto-suave);
+    line-height: 1;
+    transition: transform var(--trans);
+}
+
+.mapa-panel-cerrar:hover {
+    transform: rotate(90deg);
+    color: var(--rojo-brillante);
+}
+
+.mapa-panel img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background: #222;
+}
+
+.mapa-panel h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    color: var(--dorado);
+    margin-bottom: 0.5rem;
+}
+
+.mapa-panel p {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ==================================================
+   FAUNA
+   ================================================== */
+.fauna-wrap {
+    position: relative;
+    flex: 1;
+    margin: 0 2rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 179, 126, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) inset;
+    min-height: 400px;
+}
+
+.fauna-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fauna-controles {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    z-index: 5;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fauna-controles label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+.fauna-controles input[type="range"] {
+    width: 180px;
+    accent-color: var(--dorado);
+}
+
+.fauna-controles #fauna-hora-label {
+    color: var(--dorado);
+    font-weight: 600;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* ==================================================
+   LIBRO DE FESTIVIDADES
+   ================================================== */
+.libro-festividades {
+    position: relative;
+    flex: 1;
+    margin: 0 2rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1a1410 0%, #0a0705 100%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 2rem;
+}
+
+.libro-cerrar-global {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(206, 17, 38, 0.4);
+}
+
+.libro-cerrar-global:hover {
+    background: var(--rojo-brillante);
+    transform: scale(1.05);
+}
+
+.libro-contenedor {
+    display: flex;
+    gap: 4px;
+    perspective: 1500px;
+    width: min(700px, 90vw);
+    height: min(450px, 60vh);
+    transform-style: preserve-3d;
+}
+
+.libro-pagina {
+    flex: 1;
+    background: linear-gradient(135deg, #fdf6e3, #f5e6c8);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.libro-pagina-izq { border-radius: 8px 4px 4px 8px; }
+.libro-pagina-der { border-radius: 4px 8px 8px 4px; }
+
+.libro-pagina:hover { transform: translateY(-4px); }
+
+.libro-contenido {
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.libro-numero {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: 600;
+}
+
+.libro-contenido h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.libro-emoji-grande {
+    font-size: 4rem;
+    margin: 1rem 0;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.libro-instruccion {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+.libro-contenido-vacio {
+    background: linear-gradient(135deg, #f5e6c8, #e8d5b5);
+}
+
+.libro-decoracion {
+    font-size: 3rem;
+    opacity: 0.3;
+}
+
+.libro-contenido-fest {
+    background: linear-gradient(135deg, #fdf6e3, #f0e0c0);
+    justify-content: flex-start;
+    padding-top: 2rem;
+    overflow-y: auto;
+}
+
+.libro-fest-lista {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.libro-fest-lista li {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-left: 3px solid var(--verde);
+}
+
+.libro-fest-lista li strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.2rem;
+}
+
+.libro-fest-lista li span {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.libro-controles {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.libro-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--dorado);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.libro-nav-btn:hover {
+    background: var(--dorado);
+    color: var(--negro);
+    transform: scale(1.1);
+}
+
+.libro-indicador {
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+    font-family: 'Poppins', sans-serif;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* ==================================================
+   GASTRONOMÍA
+   ================================================== */
+.plato-wrap {
+    position: relative;
+    flex: 1;
+    margin: 0 2rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #2a1810 0%, #0a0505 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    min-height: 400px;
+}
+
+.plato {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    max-width: 80vmin;
+    max-height: 80vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f5e6c8 0%, #c9b896 100%);
+    box-shadow:
+        inset 0 -20px 40px rgba(0,0,0,0.2),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 100px rgba(212, 175, 55, 0.15);
+    transform-style: preserve-3d;
+    animation: girarPlato 40s linear infinite;
+    cursor: pointer;
+}
+
+@keyframes girarPlato {
+    from { transform: rotateX(15deg) rotateZ(0deg); }
+    to   { transform: rotateX(15deg) rotateZ(360deg); }
+}
+
+.plato-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    border: 3px solid #fff;
+}
+
+.plato-item:hover {
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.6);
+}
+
+.plato-item svg {
+    width: 60%;
+    height: 60%;
+}
+
+.plato-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(15, 15, 15, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    color: var(--texto);
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    max-width: 420px;
+    text-align: left;
+    z-index: 20;
+}
+
+.plato-info.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.plato-info strong {
+    font-family: 'Poppins', sans-serif;
+}
+
+.plato-info em {
+    font-style: normal;
+}
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+@media (max-width: 900px) {
+    .mapa-panel {
+        width: calc(100% - 2rem);
+        right: 1rem;
+        left: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-flotante {
+        top: auto;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.4rem;
+    }
+
+    .nav-btn {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .papel-picado-btn {
+        top: 1rem;
+        right: 1rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+
+    .tema-btn {
+        top: 1rem;
+        right: 4rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+
+    .mapa-wrap,
+    .fauna-wrap,
+    .libro-festividades,
+    .plato-wrap {
+        margin: 0 1rem 1rem;
+        min-height: 350px;
+    }
+
+    .libro-contenedor {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+    }
+
+    .libro-pagina {
+        min-height: 220px;
+    }
+
+    .libro-emoji-grande { font-size: 2.5rem; }
+    .libro-contenido h3 { font-size: 1.4rem; }
+
+    .libro-cerrar-global {
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .plato {
+        width: 320px;
+        height: 320px;
+    }
+
+    .plato-item {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+
+    .plato-info {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        transform: translateY(20px);
+        max-width: none;
+    }
+
+    .plato-info.visible {
+        transform: translateY(0);
+    }
+
+    .fauna-controles input[type="range"] {
+        width: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mapa-wrap,
+    .fauna-wrap,
+    .libro-festividades,
+    .plato-wrap {
+        margin: 0 0.5rem 0.5rem;
+        border-radius: 16px;
+    }
+
+    .papel-picado-btn,
+    .tema-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .tema-btn {
+        right: 3.5rem;
+    }
+}
+
+/* ============ ESTADO DE LEYENDA ============ */
+.mapa-panel-estado {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 179, 126, 0.15);
+    color: var(--verde-brillante);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mapa-panel p {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-height: 200px;
+    overflow-y: auto;
+}

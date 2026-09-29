@@ -1,0 +1,220 @@
+.vista-contenedor {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+}
+
+.vista {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    opacity: 0;
+    transition:
+        opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.vista.activa {
+    position: relative;
+    inset: auto;
+    display: flex;
+    min-height: 100vh;
+    height: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: entrar 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vista.activa #fauna-canvas {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.vista.activa .fauna-escena {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+@keyframes entrar {
+    from {
+        opacity: 1;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.vista.saliendo {
+    position: absolute;
+    inset: 0;
+    animation: salir 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes salir {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.98);
+    }
+}
+
+.vista-header {
+    padding: 5rem 2rem 1.5rem;
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.vista-header h2 {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 900;
+    background: linear-gradient(
+        135deg,
+        var(--verde-brillante),
+        var(--dorado),
+        var(--rojo-brillante)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.vista-header p {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+.portada-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(
+        ellipse at center,
+        #1a1a1a 0%,
+        #0a0a0a 70%
+    );
+}
+
+:root[data-tema="claro"] .portada-hero {
+    background: radial-gradient(
+        ellipse at center,
+        #fef9f0 0%,
+        #f5f0e8 70%
+    );
+}
+
+.portada-titulo {
+    font-family: var(--fuente-titulo);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    letter-spacing: -0.04em;
+}
+
+.portada-titulo span:nth-child(1) {
+    background: linear-gradient(
+        135deg,
+        var(--verde-brillante),
+        var(--dorado)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.portada-titulo span:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        var(--dorado),
+        var(--rojo-brillante)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.portada-sub {
+    margin-top: 1.5rem;
+    color: var(--texto-suave);
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.portada-hint {
+    margin-top: 3rem;
+    color: var(--dorado);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: pulso 2s ease-in-out infinite;
+}
+
+@keyframes pulso {
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.mapa-wrap {
+    position: relative;
+    flex: 1 0 auto;
+    min-height: 600px;
+    margin: 0 2rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 179, 126, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) inset;
+    background: radial-gradient(
+        ellipse at center,
+        #0d1f18 0%,
+        #050a08 100%
+    );
+}
+
+:root[data-tema="claro"] .mapa-wrap {
+    background: radial-gradient(
+        ellipse at center,
+        #e8f5ed 0%,
+        #d0e8db 100%
+    );
+}
+
+@media (max-width: 768px) {
+    .vista-header {
+        padding: 4rem 1rem 1rem;
+    }
+
+    .mapa-wrap {
+        margin: 0 1rem 1rem;
+        border-radius: 16px;
+        min-height: 500px;
+    }
+}
