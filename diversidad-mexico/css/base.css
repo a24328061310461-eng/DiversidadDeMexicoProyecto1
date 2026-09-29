@@ -1,0 +1,196 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    min-height: 100%;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+canvas {
+    display: block;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+/* ==========================================
+   VARIABLES
+   ========================================== */
+
+:root {
+    --verde: #006847;
+    --verde-brillante: #00b37e;
+    --rojo: #ce1126;
+    --rojo-brillante: #ff2d4a;
+    --dorado: #d4af37;
+    --dorado-brillante: #ffd966;
+    --crema: #f9f5ed;
+    --negro: #0a0a0a;
+
+    --fondo: #0a0a0a;
+    --fondo-tarjeta: #151515;
+    --texto: #f0f0f0;
+    --texto-suave: #999;
+    --borde: rgba(255, 255, 255, 0.1);
+    --sombra: rgba(0, 0, 0, 0.5);
+
+    --esp-xs: 0.25rem;
+    --esp-sm: 0.5rem;
+    --esp-md: 1rem;
+    --esp-lg: 2rem;
+    --esp-xl: 4rem;
+
+    --radio-sm: 8px;
+    --radio-md: 16px;
+    --radio-lg: 24px;
+    --radio-full: 9999px;
+
+    --trans: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --trans-rapida: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --trans-lenta: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --trans-rebote: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --fuente-titulo: 'Poppins', system-ui, sans-serif;
+    --fuente-texto: 'Inter', system-ui, sans-serif;
+}
+
+
+/* ==========================================
+   ACCESIBILIDAD
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+
+/* ==========================================
+   SELECCIÓN DE TEXTO
+   ========================================== */
+
+::selection {
+    background: var(--dorado);
+    color: var(--negro);
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.site-footer {
+    width: 100%;
+    margin-top: 50px;
+    background: #183c2b;
+    color: #ffffff;
+    border-top: 4px solid var(--dorado);
+}
+
+.site-footer-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+}
+
+.footer-marca {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer-marca strong {
+    font-family: var(--fuente-titulo);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.footer-marca span {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.footer-info {
+    text-align: right;
+}
+
+.footer-info p {
+    margin: 4px 0;
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+
+/* ==========================================
+   FOOTER RESPONSIVE
+   ========================================== */
+
+@media (max-width: 700px) {
+
+    .site-footer-contenido {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+
+}

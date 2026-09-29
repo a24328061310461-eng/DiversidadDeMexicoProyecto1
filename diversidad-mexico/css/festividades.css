@@ -1,0 +1,688 @@
+#libro-festividades {
+    --libro-ancho: min(1040px, 92vw);
+    --libro-alto: min(610px, 70vh);
+    position: relative;
+    width: 100%;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px 80px;
+    box-sizing: border-box;
+    perspective: 1800px;
+    overflow: visible;
+}
+
+.calendario-ambiente {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.calendario-estrella {
+    position: absolute;
+    font-size: 20px;
+    opacity: .45;
+    animation: estrellaFlota 5s ease-in-out infinite;
+}
+
+.calendario-estrella:nth-child(1) {
+    left: 8%;
+    top: 18%;
+}
+
+.calendario-estrella:nth-child(2) {
+    right: 9%;
+    top: 26%;
+    animation-delay: 1s;
+}
+
+.calendario-estrella:nth-child(3) {
+    left: 13%;
+    bottom: 25%;
+    animation-delay: 2s;
+}
+
+.calendario-estrella:nth-child(4) {
+    right: 14%;
+    bottom: 19%;
+    animation-delay: 3s;
+}
+
+@keyframes estrellaFlota {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(12deg);
+    }
+}
+
+.libro-escena {
+    position: relative;
+    width: var(--libro-ancho);
+    height: var(--libro-alto);
+    max-height: 650px;
+    transform-style: preserve-3d;
+    animation: libroEntrada .9s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes libroEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(35px) rotateX(8deg) scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) scale(1);
+    }
+}
+
+.libro-sombra {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: -28px;
+    height: 45px;
+    background: rgba(0,0,0,.28);
+    filter: blur(20px);
+    border-radius: 50%;
+    transform: translateZ(-50px);
+}
+
+.libro {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+.libro-hoja,
+.libro-pagina-debajo {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(0,0,0,.035) 1px, transparent 2px),
+        linear-gradient(135deg, #fffdf6, #f5eddb);
+    background-size: 18px 18px, 100% 100%;
+    box-shadow: inset 0 0 35px rgba(80,50,20,.08);
+    color: #342c22;
+}
+
+.libro-hoja {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.libro-izquierda {
+    border-radius: 12px 0 0 12px;
+    border-right: 1px solid rgba(80,50,20,.15);
+    transform-origin: right center;
+}
+
+.libro-derecha {
+    border-radius: 0 12px 12px 0;
+    border-left: 1px solid rgba(80,50,20,.15);
+    transform-origin: left center;
+}
+
+.libro-pagina-debajo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 0 12px 12px 0;
+    z-index: 2;
+    transform: translateX(12px) scale(.985);
+    filter: brightness(.94);
+    box-shadow: -8px 0 22px rgba(0,0,0,.13);
+}
+
+.libro-pagina-debajo.pagina-visible {
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
+    transition: transform .7s ease, filter .7s ease;
+}
+
+.libro-lomo {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgba(70,40,15,.05),
+        rgba(50,25,8,.28),
+        rgba(255,255,255,.3),
+        rgba(60,30,10,.18),
+        rgba(70,40,15,.05)
+    );
+    box-shadow: 0 0 15px rgba(0,0,0,.15);
+}
+
+.libro-borde {
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(100,70,35,.17);
+    pointer-events: none;
+    border-radius: 5px;
+}
+
+.libro-contenido {
+    position: relative;
+    height: 100%;
+    padding: 42px 48px;
+    box-sizing: border-box;
+}
+
+.libro-numero {
+    position: absolute;
+    top: 28px;
+    left: 38px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: .5;
+}
+
+.libro-mes {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.libro-kicker {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    opacity: .5;
+    margin-top: 25px;
+}
+
+.libro-mes h2 {
+    margin: 8px 0;
+    font-family: Georgia, serif;
+    font-size: clamp(38px, 5vw, 62px);
+}
+
+.libro-mes-emoji {
+    font-size: 48px;
+    margin-top: 20px;
+}
+
+.libro-linea {
+    width: 90px;
+    height: 3px;
+    margin: 18px auto;
+    border-radius: 5px;
+}
+
+.libro-subtitulo {
+    max-width: 330px;
+    margin: 20px auto;
+    text-align: center;
+    line-height: 1.7;
+    color: #716858;
+}
+
+.libro-calendario-svg {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,.12));
+    animation: calendarioFlota 4s ease-in-out infinite;
+}
+
+@keyframes calendarioFlota {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.libro-fecha {
+    position: absolute;
+    right: 38px;
+    bottom: 28px;
+    font-size: 12px;
+    opacity: .45;
+}
+
+.libro-derecha .libro-contenido {
+    padding-left: 55px;
+}
+
+.libro-seccion {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    opacity: .5;
+}
+
+.libro-derecha h2,
+.libro-pagina-debajo h2 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin: 10px 0 25px;
+}
+
+.festividad {
+    position: relative;
+    display: flex;
+    gap: 17px;
+    margin-bottom: 18px;
+    padding: 15px 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.55);
+    border: 1px solid rgba(80,50,20,.08);
+    box-shadow: 0 4px 12px rgba(70,40,15,.05);
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    animation: festividadEntrada .5s both;
+}
+
+.festividad:nth-child(2) {
+    animation-delay: .08s;
+}
+
+.festividad:nth-child(3) {
+    animation-delay: .16s;
+}
+
+@keyframes festividadEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.festividad:hover {
+    transform: translateX(7px);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 9px 22px rgba(70,40,15,.11);
+}
+
+.festividad-numero {
+    flex: 0 0 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--fest-color);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.festividad h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: #332a20;
+}
+
+.festividad-fecha {
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--fest-color);
+}
+
+.festividad p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #766d60;
+}
+
+.libro-pagina {
+    position: absolute;
+    right: 28px;
+    bottom: 25px;
+    font-size: 11px;
+    opacity: .45;
+}
+
+.libro-controles {
+    position: absolute;
+    left: 50%;
+    bottom: -67px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    z-index: 100;
+}
+
+.libro-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
+    color: #45382a;
+    box-shadow: 0 7px 20px rgba(0,0,0,.14);
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease;
+    font-size: 16px;
+}
+
+.libro-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+.libro-indicador {
+    min-width: 100px;
+    text-align: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.libro-flecha-lateral {
+    position: absolute;
+    right: -28px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 96px;
+    border: none;
+    border-radius: 18px;
+    background: rgba(79,120,97,.22);
+    color: rgba(255,255,255,.75);
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 150;
+    opacity: .42;
+    filter: blur(.25px);
+    transition:
+        opacity .25s ease,
+        background .25s ease,
+        transform .25s ease;
+}
+
+.libro-flecha-lateral:hover {
+    opacity: 1;
+    background: rgba(79,120,97,.85);
+    transform: translateY(-50%) translateX(-4px);
+}
+
+.libro-cubierta {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.15), transparent 30%),
+        linear-gradient(135deg, #164c3b, #0a3025 60%, #08271f);
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.28),
+        inset 0 0 0 3px rgba(255,255,255,.08);
+    color: white;
+    transform-origin: left center;
+    transition: transform .8s cubic-bezier(.65,.05,.36,1);
+    z-index: 50;
+}
+
+.cubierta-marco {
+    position: absolute;
+    inset: 25px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 7px;
+}
+
+.cubierta-contenido {
+    position: relative;
+    text-align: center;
+    max-width: 650px;
+    padding: 30px;
+}
+
+.cubierta-kicker {
+    font-size: 12px;
+    letter-spacing: 5px;
+    opacity: .7;
+}
+
+.cubierta-contenido h2 {
+    margin: 8px 0;
+    font-family: Georgia, serif;
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: .95;
+}
+
+.cubierta-contenido p {
+    color: rgba(255,255,255,.7);
+    line-height: 1.6;
+}
+
+.abrir-libro {
+    margin-top: 18px;
+    padding: 13px 25px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 30px;
+    background: rgba(255,255,255,.12);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .25s ease, background .25s ease;
+}
+
+.abrir-libro:hover {
+    transform: scale(1.06);
+    background: rgba(255,255,255,.2);
+}
+
+.libro.volteando-derecha .libro-derecha {
+    animation: pasarDerecha .7s cubic-bezier(.5,.1,.3,1);
+}
+
+.libro.volteando-izquierda .libro-izquierda {
+    animation: pasarIzquierda .7s cubic-bezier(.5,.1,.3,1);
+}
+
+@keyframes pasarDerecha {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(-170deg);
+    }
+}
+
+@keyframes pasarIzquierda {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(170deg);
+    }
+}
+
+.libro-entrada-nuevo {
+    opacity: 0;
+    transform: rotateY(8deg) scale(.98);
+}
+
+.detalle-evento {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(7px);
+    animation: detalleEntrada .25s ease;
+}
+
+@keyframes detalleEntrada {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.detalle-tarjeta {
+    width: min(500px, 92vw);
+    padding: 32px;
+    border-radius: 18px;
+    background: #fffdf7;
+    box-shadow: 0 25px 70px rgba(0,0,0,.3);
+    position: relative;
+    animation: tarjetaEntrada .4s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes tarjetaEntrada {
+    from {
+        transform: translateY(25px) scale(.94);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.detalle-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: #eee7da;
+    cursor: pointer;
+}
+
+.detalle-emoji {
+    font-size: 50px;
+}
+
+.detalle-tarjeta h3 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin: 5px 0;
+}
+
+.detalle-fecha {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.detalle-tarjeta p {
+    line-height: 1.7;
+    color: #665d51;
+}
+
+@media (max-width: 800px) {
+    #libro-festividades {
+        min-height: 850px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .libro-escena {
+        width: 96vw;
+        height: 650px;
+    }
+
+    .libro {
+        grid-template-columns: 1fr;
+    }
+
+    .libro-izquierda {
+        display: none;
+    }
+
+    .libro-lomo {
+        display: none;
+    }
+
+    .libro-derecha {
+        grid-column: 1;
+        border-radius: 12px;
+        border: none;
+    }
+
+    .libro-pagina-debajo {
+        display: none;
+    }
+
+    .libro-derecha .libro-contenido {
+        padding: 35px 28px;
+    }
+
+    .libro-derecha h2 {
+        font-size: 32px;
+    }
+
+    .festividad {
+        padding: 13px;
+    }
+
+    .libro-flecha-lateral {
+        right: -4px;
+        width: 44px;
+        height: 78px;
+    }
+}
+
+@media (max-width: 560px) {
+    .libro-escena {
+        height: 600px;
+    }
+
+    .libro-controles {
+        bottom: -62px;
+    }
+
+    .libro-flecha-lateral {
+        right: -2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .libro-escena,
+    .libro-mes-emoji,
+    .libro-calendario-svg,
+    .festividad {
+        animation: none !important;
+    }
+}

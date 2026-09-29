@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Diversidad de México · Experiencia Interactiva</title>
+
+    <meta
+        name="description"
+        content="Recorrido interactivo por la diversidad cultural y natural de México."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/fauna.css">
+</head>
+
+<body>
+
+    <canvas id="papel-picado" class="papel-picado"></canvas>
+
+    <nav class="nav-flotante">
+
+        <button class="nav-btn activo" data-vista="portada">
+            <i class="fas fa-home"></i>
+            <span>Portada</span>
+        </button>
+
+        <button class="nav-btn" data-vista="leyendas">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Leyendas</span>
+        </button>
+
+        <button class="nav-btn" data-vista="fauna">
+            <i class="fas fa-paw"></i>
+            <span>Fauna</span>
+        </button>
+
+        <button class="nav-btn" data-vista="festividades">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Festividades</span>
+        </button>
+
+        <button class="nav-btn" data-vista="gastronomia">
+            <i class="fas fa-utensils"></i>
+            <span>Gastronomía</span>
+        </button>
+
+    </nav>
+
+
+    <main class="vista-contenedor">
+
+        <!-- ================================
+             PORTADA
+             ================================ -->
+
+        <section class="vista activa" id="vista-portada">
+
+            <div class="portada-hero">
+
+                <h1 class="portada-titulo">
+                    <span>Diversidad</span>
+                    <span>de México</span>
+                </h1>
+
+                <p class="portada-sub">
+                    Interáctua · Explora · Descubre
+                </p>
+
+                <p class="portada-hint">
+                    <i class="fas fa-mouse-pointer"></i>
+                    Arrastra, mueve y toca los elementos
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             LEYENDAS
+             ================================ -->
+
+        <section class="vista" id="vista-leyendas">
+
+            <header class="vista-header">
+
+                <h2>Leyendas de México</h2>
+
+                <p>
+                    Explora el mapa.
+                    Arrastra para mover ·
+                    Haz clic en un punto para leer
+                </p>
+
+            </header>
+
+
+            <div class="mapa-wrap">
+
+                <canvas
+                    id="mapa-canvas"
+                    class="mapa-canvas"
+                ></canvas>
+
+
+                <div
+                    class="mapa-panel"
+                    id="mapa-panel"
+                >
+
+                    <button
+                        class="mapa-panel-cerrar"
+                        aria-label="Cerrar"
+                    >
+                        &times;
+                    </button>
+
+                    <img
+                        id="leyenda-img"
+                        src=""
+                        alt=""
+                    >
+
+                    <span
+                        class="mapa-panel-estado"
+                        id="leyenda-estado"
+                    ></span>
+
+                    <h3 id="leyenda-titulo"></h3>
+
+                    <p id="leyenda-desc"></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             FAUNA
+             ================================ -->
+
+        <section class="vista" id="vista-fauna">
+
+            <header class="vista-header">
+
+                <h2>Fauna Mexicana</h2>
+
+                <p>
+                    Observa cómo se mueve la fauna mexicana
+                    y cambia la hora para descubrir otra especie.
+                </p>
+
+            </header>
+
+
+            <div class="fauna-wrap">
+
+                <div class="fauna-escena">
+
+                    <canvas
+                        id="fauna-canvas"
+                        class="fauna-canvas"
+                    ></canvas>
+
+                </div>
+
+
+                <div class="fauna-controles">
+
+                    <div class="fauna-controles-titulo">
+
+                        <span>
+                            <i class="fas fa-clock"></i>
+                            Cambia la hora
+                        </span>
+
+                        <strong id="fauna-hora-label">
+                            12:00
+                        </strong>
+
+                    </div>
+
+
+                    <input
+                        type="range"
+                        id="fauna-hora"
+                        min="0"
+                        max="23"
+                        value="12"
+                        step="1"
+                        aria-label="Hora del día"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <article
+                class="fauna-info"
+                id="fauna-info"
+            >
+
+                <div class="fauna-info-principal">
+
+                    <img
+                        id="fauna-info-img"
+                        src=""
+                        alt=""
+                    >
+
+
+                    <div class="fauna-titulo">
+
+                        <span class="fauna-kicker">
+                            FAUNA DE MÉXICO
+                        </span>
+
+                        <h3 id="fauna-info-nombre"></h3>
+
+                        <span
+                            class="fauna-estado"
+                            id="fauna-info-estado"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    class="fauna-descripcion"
+                    id="fauna-info-descripcion"
+                ></p>
+
+
+                <div class="fauna-datos">
+
+                    <div class="fauna-dato">
+                        <strong>Hábitat</strong>
+                        <span id="fauna-info-habitat"></span>
+                    </div>
+
+                    <div class="fauna-dato">
+                        <strong>Región</strong>
+                        <span id="fauna-info-region"></span>
+                    </div>
+
+                    <div class="fauna-dato">
+                        <strong>Alimentación</strong>
+                        <span id="fauna-info-dieta"></span>
+                    </div>
+
+                    <div class="fauna-dato">
+                        <strong>Dato interesante</strong>
+                        <span id="fauna-info-curiosidad"></span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ================================
+             FESTIVIDADES
+             ================================ -->
+
+        <section
+            class="vista"
+            id="vista-festividades"
+        >
+
+            <header class="vista-header">
+
+                <h2>Festividades de México</h2>
+
+                <p>
+                    Abre el calendario y descubre
+                    las celebraciones de cada mes
+                </p>
+
+            </header>
+
+
+            <div
+                class="libro-festividades"
+                id="libro-festividades"
+            ></div>
+
+        </section>
+
+
+        <!-- ================================
+             GASTRONOMÍA
+             ================================ -->
+
+        <section
+            class="vista"
+            id="vista-gastronomia"
+        >
+
+            <header class="vista-header">
+
+                <h2>Gastronomía de México</h2>
+
+                <p>
+                    Elige una categoría y descubre
+                    platillos, ingredientes y tradiciones
+                </p>
+
+            </header>
+
+
+            <div class="plato-wrap">
+
+                <div
+                    class="gastronomia-categorias"
+                    id="gastronomia-categorias"
+                ></div>
+
+
+                <div class="gastronomia-layout">
+
+                    <div class="gastronomia-plato-col">
+
+                        <div
+                            class="plato"
+                            id="plato"
+                        ></div>
+
+                    </div>
+
+
+                    <aside
+                        class="gastronomia-panel"
+                        id="gastronomia-panel"
+                    ></aside>
+
+                </div>
+
+
+                <p
+                    class="gastronomia-descripcion"
+                    id="gastronomia-descripcion"
+                ></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+
+    <footer class="site-footer">
+
+        <div class="site-footer-contenido">
+
+            <div class="footer-marca">
+
+                <strong>
+                    DIVERSIDAD DE MÉXICO
+                </strong>
+
+                <span>
+                    Interáctua · Explora · Descubre
+                </span>
+
+            </div>
+
+
+            <div class="footer-info">
+
+                <p>
+                    Diversidad de México.
+                </p>
+
+                <p>
+                    © 2026 · Todos los derechos reservados
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================================
+         JAVASCRIPT
+         ================================ -->
+
+    <script src="js/utils.js"></script>
+    <script src="js/fisica.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/papel-picado.js"></script>
+    <script src="js/mapa-leyendas.js"></script>
+    <script src="js/ecosistema-fauna.js"></script>
+    <script src="js/festividades-libro.js"></script>
+    <script src="js/gastronomia-orbital.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
